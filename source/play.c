@@ -158,7 +158,7 @@ int playback(FILE * streamfd, int pipefd) {
 			data.timeout = atoi(timeout);
 
 			if(data.timeout <= 0) {
-				if(data.timeout < 0) 
+				if(data.timeout < 0)
 					fputs("Invalid stream-timeout.\n", stderr);
 
 				data.timeout = -1;
@@ -206,7 +206,7 @@ int playback(FILE * streamfd, int pipefd) {
 
 		freetrack = value(& track, "freeTrackURL");
 
-		if(freetrack && strlen(freetrack) > 0 && haskey(& rc, "download")) {
+		if(haskey(& rc, "download")) {
 			char * dnam;
 			int rv;
 
@@ -377,7 +377,7 @@ static enum mad_flow input(void * data, struct mad_stream * stream) {
 
 		ptr->preload = !0;
 	}
-	
+
 	if(nbyte <= 0)
 		return MAD_FLOW_STOP;
 
@@ -437,7 +437,7 @@ static enum mad_flow output(
 
 	assert(stream != NULL);
 	read_from_pipe(ptr->pipefd);
-	
+
 	while(nsample--) {
 		signed int sample;
 
@@ -527,7 +527,7 @@ static enum mad_flow output(
 
 inline signed scale(register mad_fixed_t sample) {
 	sample += (1L << (MAD_F_FRACBITS - 16));
-	
+
 	if(sample >= MAD_F_ONE)
 		sample = MAD_F_ONE - 1;
 	else if(sample < -MAD_F_ONE)
